@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design tokens ─────────────────────────────── */
+:root {
+  --bg:       #07101f;
+  --bg-2:     #0c1829;
+  --border:   rgba(255, 255, 255, 0.08);
+  --border-h: rgba(255, 255, 255, 0.14);
+  --accent:   #4f8ef7;        /* bleu calme, non-néon */
+  --accent-d: #2c65d4;
+  --text-dim: rgba(255, 255, 255, 0.45);
+  --text-mid: rgba(255, 255, 255, 0.70);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: white;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5 { font-family: 'Syne', sans-serif; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+/* ─── Gradient text ──────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(130deg, #93b8ff 0%, #ffffff 55%, #7aa9ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(130deg, #4f8ef7 0%, #93b8ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Buttons ────────────────────────────────────── */
+.btn-primary {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.btn-primary:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* ─── Cards ──────────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-h);
+}
+
+/* ─── Navbar links ───────────────────────────────── */
+.nav-link {
+  position: relative;
+  color: var(--text-mid);
+  transition: color 0.2s ease;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: white;
+  transition: width 0.25s ease;
+}
+.nav-link:hover { color: white; }
+.nav-link:hover::after { width: 100%; }
+
+/* ─── Section divider ────────────────────────────── */
+.section-divider {
+  width: 32px; height: 2px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 1px;
+  margin-bottom: 1.25rem;
+}
+
+/* ─── Skill badges ───────────────────────────────── */
+.skill-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: var(--text-mid);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.skill-badge:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.20);
+  color: white;
+}
+
+/* ─── Form inputs ────────────────────────────────── */
+.form-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: white;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.form-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+}
+.form-input::placeholder { color: rgba(255, 255, 255, 0.25); }
+
+/* ─── Particles canvas ───────────────────────────── */
+#particles-canvas {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+/* ─── Fade-in animations ─────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up-delay-1 { opacity:0; animation: fadeInUp 0.65s ease 0.10s forwards; }
+.animate-fade-up-delay-2 { opacity:0; animation: fadeInUp 0.65s ease 0.20s forwards; }
+.animate-fade-up-delay-3 { opacity:0; animation: fadeInUp 0.65s ease 0.35s forwards; }
+.animate-fade-up-delay-4 { opacity:0; animation: fadeInUp 0.65s ease 0.50s forwards; }
+
+/* ─── Pricing popular card ───────────────────────── */
+.pricing-popular {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+.pricing-popular:hover {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
