@@ -4,50 +4,36 @@ const projectTypes = [
   { value: '', label: 'Type de projet...' },
   { value: 'vitrine', label: 'Site Vitrine' },
   { value: 'ecommerce', label: 'Boutique E-Commerce' },
-  { value: 'automatisation', label: 'Automatisation / Sur-mesure' },
+  { value: 'webapp', label: 'Application Web / SaaS' },
+  { value: 'automatisation', label: 'Automatisation / Outil sur-mesure' },
   { value: 'autre', label: 'Autre' },
 ]
 
 const contactInfo = [
-  {
-    label: 'E-mail',
-    value: 'matthieustudio@proton.me',
-    href: 'mailto:matthieustudio@proton.me',
-  },
-  {
-    label: 'Téléphone',
-    value: '07 49 70 56 09',
-    href: 'tel:+33749705609',
-  },
-  {
-    label: 'Localisation',
-    value: 'Morbihan & partout en France',
-    href: null,
-  },
+  { label: 'Email', value: 'matthieustudio@proton.me', href: 'mailto:matthieustudio@proton.me' },
+  { label: 'Téléphone', value: '07 49 70 56 09', href: 'tel:+33749705609' },
+  { label: 'Localisation', value: 'Morbihan & toute la France', href: null },
 ]
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', projectType: '', message: '' })
-  const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [status, setStatus] = useState('idle')
 
-  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!form.name || !form.email || !form.message) return
     setStatus('sending')
-
     try {
       const res = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-
-      if (!res.ok) throw new Error('Server error')
-
+      if (!res.ok) throw new Error()
       setStatus('success')
       setForm({ name: '', email: '', projectType: '', message: '' })
     } catch {
@@ -56,32 +42,35 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 bg-[#0c1829]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-
+    <section id="contact" className="py-28 lg:py-36" style={{ background: '#0D0D0D' }}>
+      <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
-        <div className="mb-14 text-center">
-          <div className="section-divider mx-auto" />
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-3">
+        <div className="max-w-xl mb-16 reveal">
+          <span className="section-label">— Contact</span>
+          <h2
+            className="font-bold leading-tight mb-4"
+            style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', letterSpacing: '-0.03em' }}
+          >
             Démarrons votre projet
           </h2>
-          <p className="text-white/45 text-base sm:text-lg max-w-xl mx-auto">
+          <p style={{ color: '#A1A1AA', fontSize: 17, lineHeight: 1.65 }}>
             Devis gratuit et sans engagement. Je vous réponds sous 24h.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
-
-          {/* Contact info */}
+        <div className="grid lg:grid-cols-5 gap-8 reveal">
+          {/* Left info */}
           <div className="lg:col-span-2 flex flex-col gap-5">
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-sm font-semibold text-white/50 uppercase tracking-widest mb-5">Contact direct</h3>
-              <div className="flex flex-col gap-5">
+            <div className="glass-card rounded-2xl p-7">
+              <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: 'rgba(255,255,255,0.28)' }}>
+                Contact direct
+              </p>
+              <div className="flex flex-col gap-6">
                 {contactInfo.map(({ label, value, href }) => (
                   <div key={label}>
-                    <p className="text-white/30 text-xs uppercase tracking-widest mb-1">{label}</p>
+                    <p className="text-xs font-medium uppercase tracking-widest mb-1.5" style={{ color: 'rgba(255,255,255,0.28)' }}>{label}</p>
                     {href ? (
-                      <a href={href} className="text-white text-sm font-medium hover:text-white/70 transition-colors">
+                      <a href={href} className="text-white text-sm font-medium hover:text-accent-glow transition-colors" style={{ '--tw-text-opacity': 1 }}>
                         {value}
                       </a>
                     ) : (
@@ -93,35 +82,38 @@ export default function Contact() {
             </div>
 
             <div
-              className="glass-card rounded-2xl p-5"
-              style={{ borderLeft: '2px solid rgba(255,255,255,0.20)' }}
+              className="rounded-2xl p-6"
+              style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.20)' }}
             >
-              <p className="text-white/55 text-sm leading-relaxed">
-                <strong className="text-white">Devis gratuit et sans engagement</strong> — Je prends le temps de comprendre votre activité pour vous proposer la solution la plus adaptée.
+              <p className="text-white font-semibold text-sm mb-2">Premier appel offert</p>
+              <p style={{ color: '#A1A1AA', fontSize: 14, lineHeight: 1.65 }}>
+                30 minutes pour échanger sur votre projet. Je vous donne
+                une estimation honnête, sans engagement.
               </p>
             </div>
           </div>
 
           {/* Form */}
           <div className="lg:col-span-3">
-            <div className="glass-card rounded-2xl p-6 sm:p-8">
+            <div className="glass-card rounded-2xl p-7 lg:p-8">
               {status === 'success' ? (
-                <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+                <div className="flex flex-col items-center justify-center gap-4 py-14 text-center">
                   <div
                     className="w-14 h-14 rounded-full flex items-center justify-center"
-                    style={{ border: '1px solid rgba(74,222,128,0.3)', background: 'rgba(74,222,128,0.08)' }}
+                    style={{ background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.25)' }}
                   >
-                    <svg className="w-7 h-7 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="#34d399" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h4 className="text-lg font-bold text-white">Message envoyé !</h4>
-                  <p className="text-white/45 text-sm max-w-xs">
-                    Merci pour votre message. Je vous répondrai généralement sous 24h.
+                  <h4 className="text-xl font-bold text-white">Message envoyé !</h4>
+                  <p style={{ color: '#A1A1AA', fontSize: 14, maxWidth: 280 }}>
+                    Merci ! Je vous répondrai dans les 24h.
                   </p>
                   <button
                     onClick={() => setStatus('idle')}
-                    className="mt-2 text-white/40 text-sm hover:text-white/70 transition-colors underline underline-offset-4"
+                    className="mt-2 text-sm hover:text-white transition-colors"
+                    style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'underline', textUnderlineOffset: 4 }}
                   >
                     Envoyer un autre message
                   </button>
@@ -130,8 +122,8 @@ export default function Contact() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="text-white/35 text-xs uppercase tracking-widest block mb-2">
-                        Nom / Entreprise <span className="text-white/50">*</span>
+                      <label className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                        Nom / Entreprise *
                       </label>
                       <input
                         type="text" name="name" value={form.name}
@@ -141,8 +133,8 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label className="text-white/35 text-xs uppercase tracking-widest block mb-2">
-                        E-mail <span className="text-white/50">*</span>
+                      <label className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                        Email *
                       </label>
                       <input
                         type="email" name="email" value={form.email}
@@ -154,7 +146,9 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="text-white/35 text-xs uppercase tracking-widest block mb-2">Type de projet</label>
+                    <label className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                      Type de projet
+                    </label>
                     <select
                       name="projectType" value={form.projectType} onChange={handleChange}
                       className="form-input w-full rounded-xl px-4 py-3 text-sm appearance-none cursor-pointer"
@@ -166,36 +160,37 @@ export default function Contact() {
                       }}
                     >
                       {projectTypes.map(({ value, label }) => (
-                        <option key={value} value={value} className="bg-[#0c1829] text-white">{label}</option>
+                        <option key={value} value={value} style={{ background: '#151515', color: 'white' }}>{label}</option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="text-white/35 text-xs uppercase tracking-widest block mb-2">
-                      Décrivez votre projet <span className="text-white/50">*</span>
+                    <label className="block text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                      Décrivez votre projet *
                     </label>
                     <textarea
                       name="message" value={form.message} onChange={handleChange} required rows={5}
-                      placeholder="Votre activité, vos objectifs, vos inspirations, votre délai souhaité..."
+                      placeholder="Votre activité, votre objectif, vos inspirations, votre délai..."
                       className="form-input w-full rounded-xl px-4 py-3 text-sm resize-none"
                     />
                   </div>
 
                   {status === 'error' && (
                     <p className="text-red-400 text-sm text-center">
-                      Une erreur est survenue. Réessayez ou contactez-moi directement par e-mail.
+                      Une erreur est survenue. Réessayez ou écrivez-moi directement.
                     </p>
                   )}
 
                   <button
-                    type="submit" disabled={status === 'sending'}
-                    className="btn-primary w-full py-3.5 rounded-xl bg-white text-[#07101f] font-semibold text-sm disabled:opacity-50 flex items-center justify-center gap-2"
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="btn-accent w-full py-3.5 rounded-xl text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {status === 'sending' ? (
                       <>
                         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth={4} />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                         </svg>
                         Envoi en cours...
@@ -203,7 +198,7 @@ export default function Contact() {
                     ) : 'Envoyer ma demande'}
                   </button>
 
-                  <p className="text-center text-white/25 text-xs">
+                  <p className="text-center text-xs" style={{ color: 'rgba(255,255,255,0.22)' }}>
                     Sans engagement · Réponse sous 24h · Devis gratuit
                   </p>
                 </form>
