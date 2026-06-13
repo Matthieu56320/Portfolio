@@ -6,9 +6,9 @@ const services = [
       </svg>
     ),
     title: 'Applications Web',
-    problem: 'Vos processus métiers vous prennent trop de temps et d'énergie.',
+    problem: `Vos processus métiers vous prennent trop de temps et d'énergie.`,
     solution: 'Je conçois des applications web sur-mesure qui automatisent vos tâches répétitives et centralisent vos données.',
-    result: 'Moins d'opérationnel, plus de valeur — votre équipe se concentre sur ce qui compte.',
+    result: `Moins d'opérationnel, plus de valeur — votre équipe se concentre sur ce qui compte.`,
     tags: ['SaaS', 'Tableau de bord', 'API', 'Automatisation'],
   },
   {
@@ -18,7 +18,7 @@ const services = [
       </svg>
     ),
     title: 'Sites Vitrine',
-    problem: 'Votre site actuel ne convertit pas — ou vous n'en avez pas encore.',
+    problem: `Votre site actuel ne convertit pas — ou vous n'en avez pas encore.`,
     solution: 'Je crée des sites vitrines modernes, rapides et pensés pour donner confiance à vos visiteurs dès la première seconde.',
     result: 'Un outil de vente actif 24h/24 qui attire de nouveaux clients et reflète votre sérieux.',
     tags: ['Design premium', 'SEO', 'Mobile-first', 'Performant'],
@@ -31,7 +31,7 @@ const services = [
     ),
     title: 'Automatisation & SaaS',
     problem: 'Vous perdez des heures sur des tâches manuelles qui pourraient être automatisées.',
-    solution: 'J'identifie vos points de friction et je développe des outils sur-mesure : workflows automatiques, intégrations, bots.',
+    solution: `J'identifie vos points de friction et je développe des outils sur-mesure : workflows automatiques, intégrations, bots.`,
     result: 'Vos systèmes tournent seuls. Vous récupérez du temps et vous réduisez les erreurs humaines.',
     tags: ['Workflows', 'Intégrations', 'Stripe', 'Firebase'],
   },
